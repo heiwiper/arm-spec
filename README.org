@@ -1,0 +1,85 @@
+The complete spec is available [[https://developer.arm.com/-/media/developer/products/architecture/armv9-a-architecture/2022-03/ISA_A64_xml_A_profile-2022-03.tar.gz][here]] and a copy of the reference manual is [[https://drive.google.com/file/d/1uOzm8xwWxBIZ82dmBTEkOZQ1IEewFE1k/view][here]] (only Chapter 4 is relevant).
+But the only files that are needed are copied to this repository.
+They are ~encodingindex.{dtd,xml}~.
+
+A lisp program is included that does some basic processing and can serve as a starting point.
+
+Running the lisp programming produces the following output:
+
+#+begin_src sh
+  sbcl --noinform --non-interactive --load arm-questions.lisp
+#+end_src
+
+#+begin_example
+How many nodes are there? 621
+How many top-level nodes are there? 10
+For every top-level node, what is its name and how many sub-nodes does it have?
+  node reserved has 3 sub-nodes
+     unallocate4 unallocate3 perm_undef
+  node sme has 51 sub-nodes
+     UNALLOCATED_75 mortlach_contig_qstore mortlach_contig_qload UNALLOCATED_74 UNALLOCATED_73 ...
+  node unallocate1 has 0 sub-nodes
+  node sve has 431 sub-nodes
+     sve_mem_cst_si sve_mem_est_si sve_mem_cstnt_si sve_memst_si sve_mem_sst_vi_b ...
+  node unallocate2 has 0 sub-nodes
+  node dpimm has 7 sub-nodes
+     extract bitfield movewide log_imm addsub_immtags ...
+  node control has 13 sub-nodes
+     testbranch compbranch branch_imm branch_reg systemmove ...
+  node ldst has 32 sub-nodes
+     ldst_pos ldst_pac ldst_regoff memop ldst_immpre ...
+  node dpreg has 12 sub-nodes
+     dp_3src condsel condcmp_imm condcmp_reg setf ...
+  node simd-dp has 62 sub-nodes
+     floatdp3 floatsel floatdp2 floatccmp floatimm ...
+#+end_example
+
+The aim is to get the decode tables into the following form:
+
+#+begin_src lisp
+  (defun arm-disassemble (inst)
+    (arm-let ((op0 1 31)
+              (op1 4 25)) inst
+              (arm-case (op0 op1)
+                        ((0 0000) (reserved inst))
+                        ((1 0000) (sme inst))
+                        ((_ 0001) (unallocate1 inst))
+                        ((_ 0010) (sve inst))
+                        ((_ 0011) (unallocate2 inst))
+                        ((_ 100x) (dpimm inst))
+                        ((_ 101x) (control inst))
+                        ((_ x1x0) (ldst inst))
+                        ((_ x101) (dpreg inst))
+                        ((_ x111) (simd-dp inst)))))
+
+  (defun dpimm (inst)
+    (arm-let ((100 3 26)
+              (op0 3 23)) inst
+              (arm-case op0
+                        (00x (pcreladdr inst))
+                        (010 (addsub_imm inst))
+                        (011 (addsub_immtags inst))
+                        (100 (log_imm inst))
+                        (101 (movewide inst))
+                        (110 (bitfield inst))
+                        (111 (extract inst)))))
+
+  (defun addsub_imm (inst)
+    (arm-let ((sf 1 31)
+              (op 1 30)
+              (s 1 29)
+              (100010 6 23)
+              (sh 1 22)
+              (imm12 12 10)
+              (rn 5 5)
+              (rd 5 0))) inst
+    (arm-case (sf op s)
+              ((0 0 0) (add-imm-32 inst))
+              ((0 0 1) (adds-imm-32 inst))
+              ((0 1 0) (sub-imm-32 inst))
+              ((0 1 1) (subs-imm-32 inst))
+              ((1 0 0) (add-imm-64 inst))
+              ((1 0 1) (adds-imm-64 inst))
+              ((1 1 0) (sub-imm-64 inst))
+              ((1 1 1) (subs-imm-64 inst))))
+#+end_src
