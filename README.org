@@ -1,4 +1,5 @@
-The complete spec is available [[https://developer.arm.com/-/media/developer/products/architecture/armv9-a-architecture/2022-03/ISA_A64_xml_A_profile-2022-03.tar.gz][here]] and a copy of the reference manual is [[https://drive.google.com/file/d/1uOzm8xwWxBIZ82dmBTEkOZQ1IEewFE1k/view][here]] (only Chapter 4 is relevant).
+The complete spec is available [[https://developer.arm.com/-/media/developer/products/architecture/armv9-a-architecture/2022-03/ISA_A64_xml_A_profile-2022-03.tar.gz][here]] and a copy of the reference manual is [[https://drive.google.com/file/d/1uOzm8xwWxBIZ82dmBTEkOZQ1IEewFE1k/view][here]].
+Only chapter 4 of the reference manual is relevant and is extracted into [[./arm64-C4.pdf][this file]], although, the links only work on the full pdf.
 But the only files that are needed are copied to this repository.
 They are ~encodingindex.{dtd,xml}~.
 
