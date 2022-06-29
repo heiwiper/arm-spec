@@ -13,6 +13,7 @@ Running the lisp programming produces the following output:
 
 #+begin_example
 How many nodes are there? 621
+How many levels are there? 3
 How many top-level nodes are there? 10
 For every top-level node, what is its name and how many sub-nodes does it have?
   node reserved has 3 sub-nodes
@@ -33,6 +34,628 @@ For every top-level node, what is its name and how many sub-nodes does it have?
      dp_3src condsel condcmp_imm condcmp_reg setf ...
   node simd-dp has 62 sub-nodes
      floatdp3 floatsel floatdp2 floatccmp floatimm ...
+What is every node name and depth?
+  reserved
+  reserved -> perm_undef
+  reserved -> unallocate3
+  reserved -> unallocate4
+  sme
+  sme -> unalloc_0
+  sme -> mortlach_32bit_prod
+  sme -> mortlach_32bit_prod -> mortlach_f32f32_prod
+  sme -> mortlach_32bit_prod -> UNALLOCATED_48
+  sme -> mortlach_32bit_prod -> UNALLOCATED_49
+  sme -> mortlach_32bit_prod -> mortlach_b16f32_prod
+  sme -> mortlach_32bit_prod -> mortlach_f16f32_prod
+  sme -> mortlach_32bit_prod -> UNALLOCATED_51
+  sme -> mortlach_32bit_prod -> mortlach_i8i32_prod
+  sme -> mortlach_32bit_prod -> UNALLOCATED_58
+  sme -> unalloc_1
+  sme -> mortlach_64bit_prod
+  sme -> mortlach_64bit_prod -> mortlach_f64f64_prod
+  sme -> mortlach_64bit_prod -> UNALLOCATED_50
+  sme -> mortlach_64bit_prod -> UNALLOCATED_52
+  sme -> mortlach_64bit_prod -> mortlach_i16i64_prod
+  sme -> unalloc_2
+  sme -> mortlach_ins
+  sme -> mortlach_ins -> mortlach_insert_pred
+  sme -> mortlach_ins -> UNALLOCATED_63
+  sme -> unalloc_3
+  sme -> mortlach_ext
+  sme -> mortlach_ext -> mortlach_extract_pred
+  sme -> mortlach_ext -> UNALLOCATED_62
+  sme -> mortlach_ext -> UNALLOCATED_64
+  sme -> mortlach_misc
+  sme -> mortlach_misc -> mortlach_zero
+  sme -> mortlach_misc -> UNALLOCATED_135
+  sme -> mortlach_misc -> UNALLOCATED_136
+  sme -> mortlach_hvadd
+  sme -> mortlach_hvadd -> UNALLOCATED_65
+  sme -> mortlach_hvadd -> mortlach_addhv
+  sme -> mortlach_hvadd -> UNALLOCATED_66
+  sme -> mortlach_hvadd -> UNALLOCATED_137
+  sme -> unalloc_4
+  sme -> unalloc_5
+  sme -> unalloc_6
+  sme -> unalloc_7
+  sme -> mortlach_mem
+  sme -> mortlach_mem -> mortlach_contig_load
+  sme -> mortlach_mem -> mortlach_contig_store
+  sme -> mortlach_mem -> UNALLOCATED_71
+  sme -> mortlach_mem -> mortlach_ctxt_ldst
+  sme -> mortlach_mem -> UNALLOCATED_72
+  sme -> mortlach_mem -> UNALLOCATED_138
+  sme -> mortlach_mem -> UNALLOCATED_139
+  sme -> mortlach_mem -> UNALLOCATED_73
+  sme -> mortlach_mem -> UNALLOCATED_74
+  sme -> mortlach_mem -> mortlach_contig_qload
+  sme -> mortlach_mem -> mortlach_contig_qstore
+  sme -> mortlach_mem -> UNALLOCATED_75
+  unallocate1
+  sve
+  sve -> sve_int_muladd_pred
+  sve -> sve_int_muladd_pred -> sve_int_mlas_vvv_pred
+  sve -> sve_int_muladd_pred -> sve_int_mladdsub_vvv_pred
+  sve -> sve_int_pred_bin
+  sve -> sve_int_pred_bin -> sve_int_bin_pred_arit_0
+  sve -> sve_int_pred_bin -> sve_int_bin_pred_arit_1
+  sve -> sve_int_pred_bin -> sve_int_bin_pred_arit_2
+  sve -> sve_int_pred_bin -> sve_int_bin_pred_div
+  sve -> sve_int_pred_bin -> sve_int_bin_pred_log
+  sve -> sve_int_pred_red
+  sve -> sve_int_pred_red -> sve_int_reduce_0
+  sve -> sve_int_pred_red -> sve_int_reduce_1
+  sve -> sve_int_pred_red -> UNALLOCATED_1
+  sve -> sve_int_pred_red -> sve_int_movprfx_pred
+  sve -> sve_int_pred_red -> sve_int_reduce_2
+  sve -> sve_int_pred_red -> UNALLOCATED_2
+  sve -> sve_int_pred_shift
+  sve -> sve_int_pred_shift -> sve_int_bin_pred_shift_0
+  sve -> sve_int_pred_shift -> sve_int_bin_pred_shift_1
+  sve -> sve_int_pred_shift -> sve_int_bin_pred_shift_2
+  sve -> sve_int_pred_un
+  sve -> sve_int_pred_un -> UNALLOCATED_0
+  sve -> sve_int_pred_un -> sve_int_un_pred_arit_0
+  sve -> sve_int_pred_un -> sve_int_un_pred_arit_1
+  sve -> sve_int_bin_cons_arit_0
+  sve -> sve_int_unpred_logical
+  sve -> sve_int_unpred_logical -> UNALLOCATED_3
+  sve -> sve_int_unpred_logical -> sve_int_bin_cons_log
+  sve -> sve_int_unpred_logical -> sve_int_rotate_imm
+  sve -> sve_int_unpred_logical -> sve_int_tern_log
+  sve -> sve_index
+  sve -> sve_index -> sve_int_index_ii
+  sve -> sve_index -> sve_int_index_ri
+  sve -> sve_index -> sve_int_index_ir
+  sve -> sve_index -> sve_int_index_rr
+  sve -> sve_alloca
+  sve -> sve_alloca -> sve_int_arith_vl
+  sve -> sve_alloca -> sve_int_arith_svl
+  sve -> sve_alloca -> sve_int_read_vl_a
+  sve -> sve_alloca -> sve_int_read_svl_a
+  sve -> sve_int_unpred_arit_b
+  sve -> sve_int_unpred_arit_b -> sve_int_mul_b
+  sve -> sve_int_unpred_arit_b -> sve_int_sqdmulh
+  sve -> sve_int_unpred_arit_b -> UNALLOCATED_4
+  sve -> sve_int_unpred_shift
+  sve -> sve_int_unpred_shift -> sve_int_bin_cons_shift_a
+  sve -> sve_int_unpred_shift -> sve_int_bin_cons_shift_b
+  sve -> sve_int_bin_cons_misc_0_a
+  sve -> sve_int_unpred_misc
+  sve -> sve_int_unpred_misc -> sve_int_bin_cons_misc_0_b
+  sve -> sve_int_unpred_misc -> sve_int_bin_cons_misc_0_c
+  sve -> sve_int_unpred_misc -> sve_int_bin_cons_misc_0_d
+  sve -> sve_countelt
+  sve -> sve_countelt -> sve_int_countvlv0
+  sve -> sve_countelt -> sve_int_count
+  sve -> sve_countelt -> UNALLOCATED_6
+  sve -> sve_countelt -> sve_int_countvlv1
+  sve -> sve_countelt -> sve_int_pred_pattern_a
+  sve -> sve_countelt -> UNALLOCATED_7
+  sve -> sve_countelt -> UNALLOCATED_5
+  sve -> sve_countelt -> sve_int_pred_pattern_b
+  sve -> sve_maskimm
+  sve -> sve_maskimm -> sve_int_dup_mask_imm
+  sve -> sve_maskimm -> sve_int_log_imm
+  sve -> sve_maskimm -> UNALLOCATED_112
+  sve -> sve_wideimm_pred
+  sve -> sve_wideimm_pred -> sve_int_dup_imm_pred
+  sve -> sve_wideimm_pred -> UNALLOCATED_8
+  sve -> sve_wideimm_pred -> sve_int_dup_fpimm_pred
+  sve -> sve_wideimm_pred -> UNALLOCATED_9
+  sve -> sve_int_perm_dup_i
+  sve -> unalloc_0
+  sve -> sve_int_perm_tbl_3src
+  sve -> unalloc_1
+  sve -> sve_int_perm_tbl
+  sve -> sve_perm_unpred_d
+  sve -> sve_perm_unpred_d -> sve_int_perm_dup_r
+  sve -> sve_perm_unpred_d -> sve_int_perm_insrs
+  sve -> sve_perm_unpred_d -> UNALLOCATED_84
+  sve -> sve_perm_unpred_d -> UNALLOCATED_83
+  sve -> sve_perm_unpred_d -> UNALLOCATED_12
+  sve -> sve_perm_unpred_d -> sve_int_perm_unpk
+  sve -> sve_perm_unpred_d -> sve_int_perm_insrv
+  sve -> sve_perm_unpred_d -> UNALLOCATED_92
+  sve -> sve_perm_unpred_d -> UNALLOCATED_91
+  sve -> sve_perm_unpred_d -> sve_int_perm_reverse_z
+  sve -> sve_perm_unpred_d -> UNALLOCATED_114
+  sve -> sve_perm_predicates
+  sve -> sve_perm_predicates -> sve_int_perm_punpk
+  sve -> sve_perm_predicates -> UNALLOCATED_93
+  sve -> sve_perm_predicates -> UNALLOCATED_94
+  sve -> sve_perm_predicates -> UNALLOCATED_95
+  sve -> sve_perm_predicates -> sve_int_perm_bin_perm_pp
+  sve -> sve_perm_predicates -> UNALLOCATED_82
+  sve -> sve_perm_predicates -> sve_int_perm_reverse_p
+  sve -> sve_perm_predicates -> UNALLOCATED_17
+  sve -> sve_perm_predicates -> UNALLOCATED_90
+  sve -> sve_perm_predicates -> UNALLOCATED_89
+  sve -> sve_perm_predicates -> UNALLOCATED_88
+  sve -> sve_perm_predicates -> UNALLOCATED_87
+  sve -> sve_perm_predicates -> UNALLOCATED_16
+  sve -> sve_perm_predicates -> UNALLOCATED_18
+  sve -> sve_perm_predicates -> UNALLOCATED_81
+  sve -> sve_int_perm_bin_perm_zz
+  sve -> sve_perm_pred
+  sve -> sve_perm_pred -> sve_int_perm_cpy_v
+  sve -> sve_perm_pred -> sve_int_perm_compact
+  sve -> sve_perm_pred -> sve_int_perm_last_r
+  sve -> sve_perm_pred -> sve_int_perm_last_v
+  sve -> sve_perm_pred -> sve_int_perm_rev
+  sve -> sve_perm_pred -> UNALLOCATED_11
+  sve -> sve_perm_pred -> sve_int_perm_cpy_r
+  sve -> sve_perm_pred -> UNALLOCATED_13
+  sve -> sve_perm_pred -> sve_int_perm_clast_zz
+  sve -> sve_perm_pred -> sve_int_perm_clast_vz
+  sve -> sve_perm_pred -> sve_int_perm_splice
+  sve -> sve_perm_pred -> sve_intx_perm_splice
+  sve -> sve_perm_pred -> UNALLOCATED_14
+  sve -> sve_perm_pred -> sve_int_perm_revd
+  sve -> sve_perm_pred -> UNALLOCATED_85
+  sve -> sve_perm_pred -> UNALLOCATED_86
+  sve -> sve_perm_pred -> UNALLOCATED_10
+  sve -> sve_perm_pred -> UNALLOCATED_15
+  sve -> sve_perm_pred -> sve_int_perm_clast_rz
+  sve -> sve_perm_pred -> UNALLOCATED_113
+  sve -> sve_int_sel_vvv
+  sve -> sve_perm_extract
+  sve -> sve_perm_extract -> sve_int_perm_extract_i
+  sve -> sve_perm_extract -> sve_intx_perm_extract_i
+  sve -> sve_perm_inter_long
+  sve -> sve_perm_inter_long -> sve_int_perm_bin_long_perm_zz
+  sve -> sve_perm_inter_long -> UNALLOCATED_19
+  sve -> sve_cmpvec
+  sve -> sve_cmpvec -> sve_int_cmp_0
+  sve -> sve_cmpvec -> sve_int_cmp_1
+  sve -> sve_int_ucmp_vi
+  sve -> sve_int_scmp_vi
+  sve -> sve_int_pred_log
+  sve -> sve_pred_gen_b
+  sve -> sve_pred_gen_b -> sve_int_brkp
+  sve -> sve_pred_gen_b -> UNALLOCATED_20
+  sve -> sve_pred_gen_c
+  sve -> sve_pred_gen_c -> sve_int_brkn
+  sve -> sve_pred_gen_c -> UNALLOCATED_22
+  sve -> sve_pred_gen_c -> UNALLOCATED_21
+  sve -> sve_pred_gen_c -> UNALLOCATED_102
+  sve -> sve_pred_gen_c -> UNALLOCATED_100
+  sve -> sve_pred_gen_c -> UNALLOCATED_98
+  sve -> sve_pred_gen_c -> UNALLOCATED_28
+  sve -> sve_pred_gen_c -> UNALLOCATED_115
+  sve -> sve_pred_gen_c -> sve_int_break
+  sve -> sve_pred_gen_d
+  sve -> sve_pred_gen_d -> sve_int_ptest
+  sve -> sve_pred_gen_d -> UNALLOCATED_103
+  sve -> sve_pred_gen_d -> UNALLOCATED_101
+  sve -> sve_pred_gen_d -> UNALLOCATED_99
+  sve -> sve_pred_gen_d -> UNALLOCATED_97
+  sve -> sve_pred_gen_d -> sve_int_pfirst
+  sve -> sve_pred_gen_d -> UNALLOCATED_116
+  sve -> sve_pred_gen_d -> sve_int_pfalse
+  sve -> sve_pred_gen_d -> UNALLOCATED_117
+  sve -> sve_pred_gen_d -> sve_int_rdffr
+  sve -> sve_pred_gen_d -> UNALLOCATED_24
+  sve -> sve_pred_gen_d -> sve_int_pnext
+  sve -> sve_pred_gen_d -> UNALLOCATED_25
+  sve -> sve_pred_gen_d -> UNALLOCATED_26
+  sve -> sve_pred_gen_d -> sve_int_rdffr_2
+  sve -> sve_pred_gen_d -> UNALLOCATED_119
+  sve -> sve_pred_gen_d -> UNALLOCATED_23
+  sve -> sve_pred_gen_d -> sve_int_ptrue
+  sve -> sve_pred_gen_d -> UNALLOCATED_105
+  sve -> sve_pred_gen_d -> UNALLOCATED_118
+  sve -> sve_pred_gen_d -> UNALLOCATED_104
+  sve -> sve_pred_gen_d -> UNALLOCATED_107
+  sve -> sve_pred_gen_d -> UNALLOCATED_106
+  sve -> sve_pred_gen_d -> UNALLOCATED_96
+  sve -> sve_cmpgpr
+  sve -> sve_cmpgpr -> sve_int_while_rr
+  sve -> sve_cmpgpr -> sve_int_cterm
+  sve -> sve_cmpgpr -> UNALLOCATED_120
+  sve -> sve_cmpgpr -> sve_int_whilenc
+  sve -> sve_cmpgpr -> UNALLOCATED_121
+  sve -> sve_int_pred_dup
+  sve -> unalloc_3
+  sve -> sve_wideimm_unpred
+  sve -> sve_wideimm_unpred -> sve_int_arith_imm0
+  sve -> sve_wideimm_unpred -> sve_int_arith_imm1
+  sve -> sve_wideimm_unpred -> sve_int_arith_imm2
+  sve -> sve_wideimm_unpred -> sve_int_dup_imm
+  sve -> sve_wideimm_unpred -> sve_int_dup_fpimm
+  sve -> sve_pred_count_a
+  sve -> sve_pred_count_a -> sve_int_pcount_pred
+  sve -> sve_pred_count_a -> UNALLOCATED_27
+  sve -> sve_pred_count_b
+  sve -> sve_pred_count_b -> sve_int_count_v_sat
+  sve -> sve_pred_count_b -> sve_int_count_r_sat
+  sve -> sve_pred_count_b -> sve_int_count_v
+  sve -> sve_pred_count_b -> sve_int_count_r
+  sve -> sve_pred_wrffr
+  sve -> sve_pred_wrffr -> sve_int_wrffr
+  sve -> sve_pred_wrffr -> sve_int_setffr
+  sve -> sve_pred_wrffr -> UNALLOCATED_111
+  sve -> sve_pred_wrffr -> UNALLOCATED_110
+  sve -> sve_pred_wrffr -> UNALLOCATED_109
+  sve -> sve_pred_wrffr -> UNALLOCATED_108
+  sve -> sve_pred_wrffr -> UNALLOCATED_122
+  sve -> sve_pred_wrffr -> UNALLOCATED_123
+  sve -> sve_pred_wrffr -> UNALLOCATED_124
+  sve -> unalloc_2
+  sve -> unalloc_4
+  sve -> sve_intx_muladd_unpred
+  sve -> sve_intx_muladd_unpred -> sve_intx_dot
+  sve -> sve_intx_muladd_unpred -> sve_intx_qdmlalbt
+  sve -> sve_intx_muladd_unpred -> sve_intx_cdot
+  sve -> sve_intx_muladd_unpred -> sve_intx_cmla
+  sve -> sve_intx_muladd_unpred -> sve_intx_mlal_long
+  sve -> sve_intx_muladd_unpred -> sve_intx_qdmlal_long
+  sve -> sve_intx_muladd_unpred -> sve_intx_qrdmlah
+  sve -> sve_intx_muladd_unpred -> sve_intx_mixed_dot
+  sve -> sve_intx_muladd_unpred -> UNALLOCATED_29
+  sve -> sve_intx_predicated
+  sve -> sve_intx_predicated -> sve_intx_accumulate_long_pairs
+  sve -> sve_intx_predicated -> UNALLOCATED_30
+  sve -> sve_intx_predicated -> UNALLOCATED_31
+  sve -> sve_intx_predicated -> sve_intx_pred_arith_unary
+  sve -> sve_intx_predicated -> sve_intx_bin_pred_shift_sat_round
+  sve -> sve_intx_predicated -> sve_intx_pred_arith_binary
+  sve -> sve_intx_predicated -> sve_intx_arith_binary_pairs
+  sve -> sve_intx_predicated -> sve_intx_pred_arith_binary_sat
+  sve -> sve_intx_predicated -> UNALLOCATED_32
+  sve -> sve_intx_clamp
+  sve -> unalloc_5
+  sve -> unalloc_6
+  sve -> unalloc_7
+  sve -> sve_intx_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_dot_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_mla_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_qrdmlah_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_mixed_dot_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_qdmla_long_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_cdot_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> UNALLOCATED_33
+  sve -> sve_intx_by_indexed_elem -> sve_intx_cmla_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_qrdcmla_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_mla_long_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_mul_long_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_qdmul_long_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_qdmulh_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> sve_intx_mul_by_indexed_elem
+  sve -> sve_intx_by_indexed_elem -> UNALLOCATED_34
+  sve -> sve_intx_cons_widening
+  sve -> sve_intx_cons_widening -> sve_intx_cons_arith_long
+  sve -> sve_intx_cons_widening -> sve_intx_cons_arith_wide
+  sve -> sve_intx_cons_widening -> sve_intx_cons_mul_long
+  sve -> sve_intx_constructive
+  sve -> sve_intx_constructive -> sve_intx_shift_long
+  sve -> sve_intx_constructive -> UNALLOCATED_40
+  sve -> sve_intx_constructive -> sve_intx_clong
+  sve -> sve_intx_constructive -> sve_intx_eorx
+  sve -> sve_intx_constructive -> sve_intx_mmla
+  sve -> sve_intx_constructive -> UNALLOCATED_35
+  sve -> sve_intx_constructive -> sve_intx_perm_bit
+  sve -> sve_intx_acc
+  sve -> sve_intx_acc -> sve_intx_cadd
+  sve -> sve_intx_acc -> UNALLOCATED_125
+  sve -> sve_intx_acc -> sve_intx_aba_long
+  sve -> sve_intx_acc -> sve_intx_adc_long
+  sve -> sve_intx_acc -> sve_intx_sra
+  sve -> sve_intx_acc -> sve_intx_shift_insert
+  sve -> sve_intx_acc -> sve_intx_aba
+  sve -> sve_intx_narrowing
+  sve -> sve_intx_narrowing -> sve_intx_extract_narrow
+  sve -> sve_intx_narrowing -> UNALLOCATED_130
+  sve -> sve_intx_narrowing -> sve_intx_shift_narrow
+  sve -> sve_intx_narrowing -> UNALLOCATED_41
+  sve -> sve_intx_narrowing -> UNALLOCATED_42
+  sve -> sve_intx_narrowing -> sve_intx_arith_narrow
+  sve -> sve_intx_match
+  sve -> sve_intx_histseg
+  sve -> sve_intx_histseg -> sve_intx_histseg
+  sve -> sve_intx_histseg -> UNALLOCATED_126
+  sve -> sve_intx_histcnt
+  sve -> sve_intx_crypto
+  sve -> sve_intx_crypto -> sve_crypto_unary
+  sve -> sve_intx_crypto -> UNALLOCATED_127
+  sve -> sve_intx_crypto -> UNALLOCATED_36
+  sve -> sve_intx_crypto -> UNALLOCATED_37
+  sve -> sve_intx_crypto -> UNALLOCATED_38
+  sve -> sve_intx_crypto -> sve_crypto_binary_dest
+  sve -> sve_intx_crypto -> UNALLOCATED_39
+  sve -> sve_intx_crypto -> UNALLOCATED_128
+  sve -> sve_intx_crypto -> UNALLOCATED_129
+  sve -> sve_intx_crypto -> sve_crypto_binary_const
+  sve -> sve_fp_fcmla
+  sve -> unalloc_13
+  sve -> sve_fp_fcadd
+  sve -> unalloc_8
+  sve -> unalloc_9
+  sve -> unalloc_10
+  sve -> unalloc_11
+  sve -> sve_fp_fcvt2
+  sve -> unalloc_12
+  sve -> sve_fp_pairwise
+  sve -> unalloc_14
+  sve -> unalloc_15
+  sve -> unalloc_16
+  sve -> unalloc_20
+  sve -> sve_fp_fma_by_indexed_elem
+  sve -> sve_fp_fcmla_by_indexed_elem
+  sve -> sve_fp_fmul_by_indexed_elem
+  sve -> unalloc_17
+  sve -> unalloc_18
+  sve -> sve_fp_fma_w_by_indexed_elem
+  sve -> sve_fp_fma_w_by_indexed_elem -> sve_fp_fdot_by_indexed_elem
+  sve -> sve_fp_fma_w_by_indexed_elem -> UNALLOCATED_131
+  sve -> sve_fp_fma_w_by_indexed_elem -> UNALLOCATED_43
+  sve -> sve_fp_fma_w_by_indexed_elem -> sve_fp_fma_long_by_indexed_elem
+  sve -> unalloc_19
+  sve -> sve_fp_fma_w
+  sve -> sve_fp_fma_w -> sve_fp_fdot
+  sve -> sve_fp_fma_w -> UNALLOCATED_44
+  sve -> sve_fp_fma_w -> UNALLOCATED_45
+  sve -> sve_fp_fma_w -> sve_fp_fma_long
+  sve -> unalloc_21
+  sve -> unalloc_22
+  sve -> unalloc_23
+  sve -> sve_fp_fmmla
+  sve -> unalloc_24
+  sve -> unalloc_25
+  sve -> sve_fp_3op_p_pd
+  sve -> sve_fp_3op_u_zd
+  sve -> sve_fp_pred
+  sve -> sve_fp_pred -> sve_fp_2op_p_zds
+  sve -> sve_fp_pred -> sve_fp_ftmad
+  sve -> sve_fp_pred -> UNALLOCATED_133
+  sve -> sve_fp_pred -> sve_fp_2op_i_p_zds
+  sve -> sve_fp_pred -> UNALLOCATED_134
+  sve -> sve_fp_unary
+  sve -> sve_fp_unary -> sve_fp_2op_p_zd_a
+  sve -> sve_fp_unary -> sve_fp_2op_p_zd_b_0
+  sve -> sve_fp_unary -> sve_fp_2op_p_zd_b_1
+  sve -> sve_fp_unary -> sve_fp_2op_p_zd_c
+  sve -> sve_fp_unary -> sve_fp_2op_p_zd_d
+  sve -> sve_fp_fast_red
+  sve -> unalloc_26
+  sve -> sve_fp_unary_unpred
+  sve -> sve_fp_unary_unpred -> sve_fp_2op_u_zd
+  sve -> sve_fp_unary_unpred -> UNALLOCATED_132
+  sve -> sve_fp_cmpzero
+  sve -> sve_fp_cmpzero -> sve_fp_2op_p_pd
+  sve -> sve_fp_cmpzero -> UNALLOCATED_46
+  sve -> sve_fp_slowreduce
+  sve -> sve_fp_slowreduce -> sve_fp_2op_p_vd
+  sve -> sve_fp_slowreduce -> UNALLOCATED_47
+  sve -> sve_fp_fma
+  sve -> sve_fp_fma -> sve_fp_3op_p_zds_a
+  sve -> sve_fp_fma -> sve_fp_3op_p_zds_b
+  sve -> sve_mem32
+  sve -> sve_mem32 -> sve_mem_32b_prfm_sv
+  sve -> sve_mem32 -> UNALLOCATED_54
+  sve -> sve_mem32 -> sve_mem_32b_gld_sv_a
+  sve -> sve_mem32 -> sve_mem_32b_gld_sv_b
+  sve -> sve_mem32 -> sve_mem_32b_pfill
+  sve -> sve_mem32 -> UNALLOCATED_55
+  sve -> sve_mem32 -> sve_mem_32b_fill
+  sve -> sve_mem32 -> UNALLOCATED_56
+  sve -> sve_mem32 -> sve_mem_prfm_si
+  sve -> sve_mem32 -> UNALLOCATED_57
+  sve -> sve_mem32 -> sve_mem_32b_gld_vs
+  sve -> sve_mem32 -> sve_mem_32b_gldnt_vs
+  sve -> sve_mem32 -> sve_mem_prfm_ss
+  sve -> sve_mem32 -> sve_mem_32b_prfm_vi
+  sve -> sve_mem32 -> UNALLOCATED_53
+  sve -> sve_mem32 -> sve_mem_32b_gld_vi
+  sve -> sve_mem32 -> sve_mem_ld_dup
+  sve -> sve_memcld
+  sve -> sve_memcld -> sve_mem_cldnt_si
+  sve -> sve_memcld -> sve_mem_cldnt_ss
+  sve -> sve_memcld -> sve_mem_eld_si
+  sve -> sve_memcld -> sve_mem_eld_ss
+  sve -> sve_memcld -> sve_mem_ldqr_si
+  sve -> sve_memcld -> sve_mem_cld_si
+  sve -> sve_memcld -> UNALLOCATED_60
+  sve -> sve_memcld -> sve_mem_cldnf_si
+  sve -> sve_memcld -> UNALLOCATED_61
+  sve -> sve_memcld -> sve_mem_ldqr_ss
+  sve -> sve_memcld -> sve_mem_cld_ss
+  sve -> sve_memcld -> sve_mem_cldff_ss
+  sve -> sve_memcld -> UNALLOCATED_59
+  sve -> sve_mem64
+  sve -> sve_mem64 -> UNALLOCATED_69
+  sve -> sve_mem64 -> sve_mem_64b_prfm_sv2
+  sve -> sve_mem64 -> UNALLOCATED_70
+  sve -> sve_mem64 -> sve_mem_64b_prfm_sv
+  sve -> sve_mem64 -> sve_mem_64b_gld_sv2
+  sve -> sve_mem64 -> sve_mem_64b_gld_sv
+  sve -> sve_mem64 -> UNALLOCATED_67
+  sve -> sve_mem64 -> sve_mem_64b_prfm_vi
+  sve -> sve_mem64 -> UNALLOCATED_68
+  sve -> sve_mem64 -> sve_mem_64b_gldnt_vs
+  sve -> sve_mem64 -> sve_mem_64b_gld_vi
+  sve -> sve_mem64 -> sve_mem_64b_gld_vs2
+  sve -> sve_mem64 -> sve_mem_64b_gld_vs
+  sve -> sve_memst_cs
+  sve -> sve_memst_cs -> UNALLOCATED_76
+  sve -> sve_memst_cs -> UNALLOCATED_78
+  sve -> sve_memst_cs -> sve_mem_pspill
+  sve -> sve_memst_cs -> UNALLOCATED_79
+  sve -> sve_memst_cs -> sve_mem_spill
+  sve -> sve_memst_cs -> UNALLOCATED_80
+  sve -> sve_memst_cs -> sve_mem_cst_ss
+  sve -> sve_memst_nt
+  sve -> sve_memst_nt -> sve_mem_sstnt_64b_vs
+  sve -> sve_memst_nt -> sve_mem_cstnt_ss
+  sve -> sve_memst_nt -> sve_mem_sstnt_32b_vs
+  sve -> sve_memst_nt -> sve_mem_est_ss
+  sve -> sve_memst_nt -> UNALLOCATED_77
+  sve -> sve_memst_ss
+  sve -> sve_memst_ss -> sve_mem_sst_vs_a
+  sve -> sve_memst_ss -> sve_mem_sst_sv_a
+  sve -> sve_memst_ss -> sve_mem_sst_vs_b
+  sve -> sve_memst_ss -> sve_mem_sst_sv_b
+  sve -> sve_memst_ss2
+  sve -> sve_memst_ss2 -> sve_mem_sst_vs2
+  sve -> sve_memst_ss2 -> sve_mem_sst_sv2
+  sve -> sve_memst_ss2 -> sve_mem_sst_vi_a
+  sve -> sve_memst_ss2 -> sve_mem_sst_vi_b
+  sve -> sve_memst_si
+  sve -> sve_memst_si -> sve_mem_cstnt_si
+  sve -> sve_memst_si -> sve_mem_est_si
+  sve -> sve_memst_si -> sve_mem_cst_si
+  unallocate2
+  dpimm
+  dpimm -> pcreladdr
+  dpimm -> addsub_imm
+  dpimm -> addsub_immtags
+  dpimm -> log_imm
+  dpimm -> movewide
+  dpimm -> bitfield
+  dpimm -> extract
+  control
+  control -> condbranch
+  control -> exception
+  control -> systeminstrswithreg
+  control -> hints
+  control -> barriers
+  control -> pstate
+  control -> systemresult
+  control -> systeminstrs
+  control -> systemmove
+  control -> branch_reg
+  control -> branch_imm
+  control -> compbranch
+  control -> testbranch
+  ldst
+  ldst -> comswappr
+  ldst -> asisdlse
+  ldst -> asisdlsep
+  ldst -> UNALLOCATED_advsimd_85
+  ldst -> asisdlso
+  ldst -> asisdlsop
+  ldst -> UNALLOCATED_advsimd_94
+  ldst -> UNALLOCATED_advsimd_93
+  ldst -> UNALLOCATED_advsimd_92
+  ldst -> UNALLOCATED_advsimd_91
+  ldst -> UNALLOCATED_advsimd_90
+  ldst -> ldsttags
+  ldst -> ldstexclp
+  ldst -> UNALLOCATED_advsimd_83
+  ldst -> ldstexclr
+  ldst -> ldstord
+  ldst -> comswap
+  ldst -> ldapstl_unscaled
+  ldst -> loadlit
+  ldst -> memcms
+  ldst -> ldstnapair_offs
+  ldst -> ldstpair_post
+  ldst -> ldstpair_off
+  ldst -> ldstpair_pre
+  ldst -> ldst_unscaled
+  ldst -> ldst_immpost
+  ldst -> ldst_unpriv
+  ldst -> ldst_immpre
+  ldst -> memop
+  ldst -> ldst_regoff
+  ldst -> ldst_pac
+  ldst -> ldst_pos
+  dpreg
+  dpreg -> dp_2src
+  dpreg -> dp_1src
+  dpreg -> log_shift
+  dpreg -> addsub_shift
+  dpreg -> addsub_ext
+  dpreg -> addsub_carry
+  dpreg -> rmif
+  dpreg -> setf
+  dpreg -> condcmp_reg
+  dpreg -> condcmp_imm
+  dpreg -> condsel
+  dpreg -> dp_3src
+  simd-dp
+  simd-dp -> UNALLOCATED_advsimd_26
+  simd-dp -> UNALLOCATED_advsimd_27
+  simd-dp -> cryptoaes
+  simd-dp -> cryptosha3
+  simd-dp -> UNALLOCATED_advsimd_52
+  simd-dp -> cryptosha2
+  simd-dp -> UNALLOCATED_advsimd_29
+  simd-dp -> UNALLOCATED_advsimd_53
+  simd-dp -> UNALLOCATED_advsimd_63
+  simd-dp -> asisdone
+  simd-dp -> UNALLOCATED_advsimd_55
+  simd-dp -> UNALLOCATED_advsimd_65
+  simd-dp -> asisdsamefp16
+  simd-dp -> UNALLOCATED_advsimd_57
+  simd-dp -> asisdmiscfp16
+  simd-dp -> UNALLOCATED_advsimd_49
+  simd-dp -> asisdsame2
+  simd-dp -> asisdmisc
+  simd-dp -> asisdpair
+  simd-dp -> UNALLOCATED_advsimd_67
+  simd-dp -> UNALLOCATED_advsimd_68
+  simd-dp -> asisddiff
+  simd-dp -> asisdsame
+  simd-dp -> asisdshf
+  simd-dp -> UNALLOCATED_advsimd_70
+  simd-dp -> asisdelem
+  simd-dp -> asimdtbl
+  simd-dp -> asimdperm
+  simd-dp -> asimdext
+  simd-dp -> asimdins
+  simd-dp -> UNALLOCATED_advsimd_19
+  simd-dp -> UNALLOCATED_advsimd_31
+  simd-dp -> asimdsamefp16
+  simd-dp -> UNALLOCATED_advsimd_21
+  simd-dp -> asimdmiscfp16
+  simd-dp -> UNALLOCATED_advsimd_13
+  simd-dp -> asimdsame2
+  simd-dp -> asimdmisc
+  simd-dp -> asimdall
+  simd-dp -> UNALLOCATED_advsimd_33
+  simd-dp -> UNALLOCATED_advsimd_34
+  simd-dp -> asimddiff
+  simd-dp -> asimdsame
+  simd-dp -> asimdimm
+  simd-dp -> asimdshf
+  simd-dp -> UNALLOCATED_advsimd_36
+  simd-dp -> asimdelem
+  simd-dp -> crypto3_imm2
+  simd-dp -> cryptosha512_3
+  simd-dp -> crypto4
+  simd-dp -> crypto3_imm6
+  simd-dp -> cryptosha512_2
+  simd-dp -> UNALLOCATED_advsimd_11
+  simd-dp -> float2fix
+  simd-dp -> float2int
+  simd-dp -> floatdp1
+  simd-dp -> floatcmp
+  simd-dp -> floatimm
+  simd-dp -> floatccmp
+  simd-dp -> floatdp2
+  simd-dp -> floatsel
+  simd-dp -> floatdp3
 #+end_example
 
 The aim is to get the decode tables into the following form:

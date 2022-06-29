@@ -1,6 +1,6 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (ql:quickload :cxml-klacks)
-  (ql:quickload :xmls))
+  (ql:quickload :cxml-klacks :silent t)
+  (ql:quickload :xmls :silent t))
 
 (defpackage :arm-questions
   (:use :common-lisp))
@@ -83,10 +83,57 @@
     while key
     do (display-toplevel-count source)))
 
+(defun display-how-many-levels (source)
+  (loop
+    with max = 0
+    and depth = 0
+    for key = (klacks:peek source)
+    do
+       (if key
+           (progn
+             (case key
+               (:start-element
+                (when (equal "node" (klacks:current-qname source))
+                  (incf depth)
+                  (setf max (max depth max))))
+               (:end-element
+                (when (equal "node" (klacks:current-qname source))
+                  (decf depth))))
+             (klacks:consume source))
+           (return max))))
+
+(defun display-node-names (source)
+  (klacks:consume source)
+  (loop
+    with depth = 1
+    and parents = nil
+    for key = (klacks:peek source)
+    while key
+    do
+       (case key
+         (:start-element
+          (when (equal "node" (klacks:current-qname source))
+            (format t "  ~{~a~^ -> ~}~%" (reverse (cons (get-name source) parents)))
+            (incf depth)
+            (push (get-name source) parents))
+          (klacks:consume source))
+         (:end-element
+          (when (equal "node" (klacks:current-qname source))
+            (decf depth)
+            (pop parents))
+          (klacks:consume source)
+          (when (= 0 depth)
+            (return)))
+         (otherwise
+          (klacks:consume source)))))
+
 (defvar *encoding-index-path* (probe-file "~/.cache/encodingindex.xml"))
 
 (klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
   (format t "How many nodes are there? ~d~%" (count-nodes source)))
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "How many levels are there? ~d~%" (display-how-many-levels source)))
 
 (klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
   (format t "How many top-level nodes are there? ~d~%" (count-toplevel-nodes source)))
@@ -94,3 +141,14 @@
 (klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
   (format t "For every top-level node, what is its name and how many sub-nodes does it have?~%")
   (display-toplevel-counts source))
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "What is every node name and depth?~%")
+  (display-node-names source))
+
+(defun goto (source name)
+  (loop for key = (klacks:find-element source "node")
+        while key
+        do (if (equal name (get-name source))
+               (return)
+               (klacks:consume source))))
