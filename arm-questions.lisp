@@ -146,9 +146,54 @@
   (format t "What is every node name and depth?~%")
   (display-node-names source))
 
-(defun goto (source name)
+(defun goto-node (source name)
   (loop for key = (klacks:find-element source "node")
         while key
         do (if (equal name (get-name source))
                (return)
                (klacks:consume source))))
+
+(defun goto-instructiontable (source name)
+  (loop for key = (klacks:find-element source "instructiontable")
+        while key
+        do (if (equal name (get-name source))
+               (return)
+               (klacks:consume source))))
+
+(defun find-element-within (source lname within)
+  (loop
+    (multiple-value-bind (key current-uri current-lname current-qname)
+        (klacks:peek source)
+      (cond
+        ((null key)
+         (return nil))
+        ((and (eq key :start-element)
+              (equal lname current-lname))
+         (return
+           (values key current-uri current-lname current-qname)))
+        ((and (eq key :end-element)
+              (equal within current-lname))
+         (return nil)))
+      (klacks:consume source))))
+
+(defun process-instructiontable (source name)
+  (goto-instructiontable source name)
+  (klacks:find-element source "tbody")
+  (klacks:consume source)
+  (flet ((process-row ()
+           (loop
+             (multiple-value-bind (key)
+                 (find-element-within source "td" "tr")
+               (if key
+                   (let ((data (nth-value 1 (klacks:peek-next source))))
+                     (if data
+                         (format t "~a " data)
+                         (format t "_ ")))
+                   (return nil))))))
+    (loop
+      (if (find-element-within source "tr" "tbody")
+          (progn
+            (format t "~a~%" (klacks:get-attribute source "encname"))
+            (klacks:consume source)
+            (process-row))
+          (return nil)))))
