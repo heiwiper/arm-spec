@@ -127,25 +127,6 @@
          (otherwise
           (klacks:consume source)))))
 
-(defvar *encoding-index-path* (probe-file "~/.cache/encodingindex.xml"))
-
-(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
-  (format t "How many nodes are there? ~d~%" (count-nodes source)))
-
-(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
-  (format t "How many levels are there? ~d~%" (display-how-many-levels source)))
-
-(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
-  (format t "How many top-level nodes are there? ~d~%" (count-toplevel-nodes source)))
-
-(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
-  (format t "For every top-level node, what is its name and how many sub-nodes does it have?~%")
-  (display-toplevel-counts source))
-
-(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
-  (format t "What is every node name and depth?~%")
-  (display-node-names source))
-
 (defun goto-node (source name)
   (loop for key = (klacks:find-element source "node")
         while key
@@ -176,11 +157,11 @@
          (return nil)))
       (klacks:consume source))))
 
-(defun process-instructiontable (source name)
+(defun display-instructiontable (source name)
   (goto-instructiontable source name)
   (klacks:find-element source "tbody")
   (klacks:consume source)
-  (flet ((process-row ()
+  (flet ((display-row ()
            (format t "  ")
            (loop
              (if (find-element-within source "td" "tr")
@@ -188,12 +169,45 @@
                    (if data
                        (format t "~a " data)
                        (format t "_ ")))
-                 (return nil)))
-           (terpri)))
+                 (return nil)))))
     (loop
       (if (find-element-within source "tr" "tbody")
           (progn
-            (format t "~a~%" (klacks:get-attribute source "encname"))
-            (klacks:consume source)
-            (process-row))
+            (let ((encname (klacks:get-attribute source "encname")))
+              (klacks:consume source)
+              (display-row)
+              (format t "(~a)~%" encname)))
           (return nil)))))
+
+(defvar *encoding-index-path* (probe-file "~/.cache/encodingindex.xml"))
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "How many nodes are there? ~d~%" (count-nodes source)))
+
+(terpri)
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "How many levels are there? ~d~%" (display-how-many-levels source)))
+
+(terpri)
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "How many top-level nodes are there? ~d~%" (count-toplevel-nodes source)))
+
+(terpri)
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "For every top-level node, what is its name and how many sub-nodes does it have?~%")
+  (display-toplevel-counts source))
+
+(terpri)
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "What is every node name and depth?~%")
+  (display-node-names source))
+
+(terpri)
+
+(klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
+  (format t "What does the instruction table for \"movewide\" look like?~%")
+  (display-instructiontable source "movewide"))

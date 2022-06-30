@@ -13,8 +13,11 @@ Running the lisp programming produces the following output:
 
 #+begin_example
 How many nodes are there? 621
+
 How many levels are there? 3
+
 How many top-level nodes are there? 10
+
 For every top-level node, what is its name and how many sub-nodes does it have?
   node reserved has 3 sub-nodes
      unallocate4 unallocate3 perm_undef
@@ -34,6 +37,7 @@ For every top-level node, what is its name and how many sub-nodes does it have?
      dp_3src condsel condcmp_imm condcmp_reg setf ...
   node simd-dp has 62 sub-nodes
      floatdp3 floatsel floatdp2 floatccmp floatimm ...
+
 What is every node name and depth?
   reserved
   reserved -> perm_undef
@@ -656,6 +660,16 @@ What is every node name and depth?
   simd-dp -> floatdp2
   simd-dp -> floatsel
   simd-dp -> floatdp3
+
+What does the instruction table for "movewide" look like?
+  _ 01 _ UNALLOCATED (UNALLOCATED_13_movewide)
+  0 _ 1x UNALLOCATED (UNALLOCATED_10_movewide)
+  0 00 0x MOVN 32-bit (MOVN_32_movewide)
+  0 10 0x MOVZ 32-bit (MOVZ_32_movewide)
+  0 11 0x MOVK 32-bit (MOVK_32_movewide)
+  1 00 _ MOVN 64-bit (MOVN_64_movewide)
+  1 10 _ MOVZ 64-bit (MOVZ_64_movewide)
+  1 11 _ MOVK 64-bit (MOVK_64_movewide)
 #+end_example
 
 The aim is to get the decode tables into the following form:
