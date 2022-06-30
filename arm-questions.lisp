@@ -181,15 +181,15 @@
   (klacks:find-element source "tbody")
   (klacks:consume source)
   (flet ((process-row ()
+           (format t "  ")
            (loop
-             (multiple-value-bind (key)
-                 (find-element-within source "td" "tr")
-               (if key
-                   (let ((data (nth-value 1 (klacks:peek-next source))))
-                     (if data
-                         (format t "~a " data)
-                         (format t "_ ")))
-                   (return nil))))))
+             (if (find-element-within source "td" "tr")
+                 (let ((data (nth-value 1 (klacks:peek-next source))))
+                   (if data
+                       (format t "~a " data)
+                       (format t "_ ")))
+                 (return nil)))
+           (terpri)))
     (loop
       (if (find-element-within source "tr" "tbody")
           (progn
