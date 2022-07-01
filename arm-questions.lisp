@@ -179,7 +179,7 @@
               (format t "(~a)~%" encname)))
           (return nil)))))
 
-(defvar *encoding-index-path* (probe-file "~/.cache/encodingindex.xml"))
+(defvar *encoding-index-path* (probe-file "encodingindex.xml"))
 
 (klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
   (format t "How many nodes are there? ~d~%" (count-nodes source)))
