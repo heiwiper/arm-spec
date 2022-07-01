@@ -179,6 +179,8 @@
               (format t "(~a)~%" encname)))
           (return nil)))))
 
+(uiop:copy-file #p"encodingindex.xml" #p"~/.cache/encodingindex.xml")
+(uiop:copy-file #p"encodingindex.dtd" #p"~/.cache/encodingindex.dtd")
 (defvar *encoding-index-path* (probe-file "~/.cache/encodingindex.xml"))
 
 (klacks:with-open-source (source (cxml:make-source *encoding-index-path*))
